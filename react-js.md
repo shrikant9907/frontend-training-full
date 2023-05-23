@@ -459,7 +459,7 @@ Explanation: Provide an overview of the different phases in the React component 
 Class component lifecycle methods
 Explanation: Explore the class component lifecycle methods, such as componentDidMount, componentDidUpdate, and componentWillUnmount, and their purposes.
 Example Code:
-``` 
+``` js
 import React, { Component } from 'react';
 
 class Timer extends Component {
@@ -490,4 +490,271 @@ const App = () => {
 
 Description: In this example, the Timer class component uses the componentDidMount method to start a timer that increments the seconds state every second using setInterval. The componentWillUnmount method is used to clear the timer when the component is about to be unmounted. The current value of seconds is displayed in the render method.
 
-###
+### Day 14: React Context with useContext Hook
+
+Recap of React Context and Provider/Consumer pattern
+Explanation: Review the concept of React Context and how to use the Provider/Consumer pattern for sharing data across components.
+Using the useContext hook for consuming context
+Explanation: Introduce the useContext hook as a simpler and more concise way to consume context in functional components.
+Example Code:
+```js
+import React, { createContext, useContext } from 'react';
+
+const ThemeContext = createContext('light');
+
+const ThemeToggle = () => {
+  const theme = useContext(ThemeContext);
+  const toggleTheme = () => {
+    // Toggle theme logic
+  };
+
+  return (
+    <button onClick={toggleTheme}>
+      Toggle Theme ({theme === 'light' ? 'Dark' : 'Light'})
+    </button>
+  );
+};
+
+const App = () => {
+  return (
+    <ThemeContext.Provider value="light">
+      <ThemeToggle />
+    </ThemeContext.Provider>
+  );
+};
+```
+Description: In this example, we create a ThemeContext using createContext and provide a default value of 'light'. The ThemeToggle component consumes the theme value using the useContext hook. When the toggleTheme function is called, the theme is toggled between 'light' and 'dark'. The current theme is displayed on the button.
+
+### Day 15: Error Boundaries
+
+Introduction to Error Boundaries
+Explanation: Introduce the concept of Error Boundaries as a way to handle and gracefully display errors in React components.
+Creating an Error Boundary component
+Explanation: Discuss how to create an Error Boundary component using the static getDerivedStateFromError and componentDidCatch lifecycle methods.
+Implementing an Error Boundary in a component hierarchy
+Explanation: Explain how to wrap components in an Error Boundary to catch and handle errors within the component tree.
+Example Code:
+
+```js
+import React, { Component } from 'react';
+
+class ErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError(error) {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    // Log or handle the error
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return <div>Something went wrong.</div>;
+    }
+
+    return this.props.children;
+  }
+}
+
+const App = () => {
+  return (
+    <ErrorBoundary>
+      <div>
+        <h1>Welcome to My App</h1>
+        <SomeComponent />
+      </div>
+    </ErrorBoundary>
+  );
+};
+```
+Description: In this example, we create an ErrorBoundary component that catches and handles errors within its child components. If an error occurs, the getDerivedStateFromError method updates the state to indicate that an error has occurred. The componentDidCatch method can be used to log or handle the error. The ErrorBoundary component displays a fallback message when an error is caught. The SomeComponent is wrapped in the ErrorBoundary to handle any potential errors that may occur within it.
+
+### Day 16: React Testing with Jest and React Testing Library
+
+Introduction to testing in React
+Explanation: Provide an overview of the importance of testing in React applications and the benefits of using testing libraries.
+Setting up Jest and React Testing Library
+Explanation: Guide the participants through the setup process for Jest and React Testing Library in a React project.
+Writing unit tests for React components
+Explanation: Explain how to write unit tests using Jest and React Testing Library to test component rendering, user interactions, and state changes.
+Example Code:
+```js
+import React from 'react';
+import { render, fireEvent } from '@testing-library/react';
+import Button from './Button';
+
+describe('Button component', () => {
+  test('renders the button correctly', () => {
+    const { getByText } = render(<Button label="Click me" />);
+    const buttonElement = getByText('Click me');
+    expect(buttonElement).toBeInTheDocument();
+  });
+
+  test('calls the onClick handler when clicked', () => {
+    const handleClick = jest.fn();
+    const { getByText } = render(<Button label="Click me" onClick={handleClick} />);
+    const buttonElement = getByText('Click me');
+    fireEvent.click(buttonElement);
+    expect(handleClick).toHaveBeenCalled();
+  });
+});
+```
+Description: In this example, we write unit tests for a Button component. The first test checks if the button is rendered correctly by using the getByText function from React Testing Library to find the button element with the specified label. The second test simulates a click event on the button using fireEvent.click and verifies that the onClick handler is called by using a mock function (jest.fn()) and the toHaveBeenCalled assertion.
+
+### Day 17: React Component Composition and Reusability
+
+Component composition and reusability
+Explanation: Discuss the concept of component composition and how to create reusable components by composing smaller, modular components.
+Props children pattern
+Explanation: Introduce the props children pattern to pass components or elements as children to other components, allowing for flexible and dynamic compositions.
+Example Code:
+
+```js
+import React from 'react';
+
+const Card = ({ title, children }) => {
+  return (
+    <div className="card">
+      <h2>{title}</h2>
+      <div className="content">{children}</div>
+    </div>
+  );
+};
+
+const App = () => {
+  return (
+    <Card title="My Card">
+      <p>This is the content of my card.</p>
+    </Card>
+  );
+};
+```
+Description: In this example, we have a Card component that accepts a title prop and children as its content. The children prop allows any React elements or components to be passed as children to the Card component, enabling flexible composition. In the App component, we pass a paragraph element as the content of the Card component.
+
+### Day 18: React Performance Optimization
+
+React.memo for optimizing functional components
+Explanation: Introduce the React.memo higher-order component to optimize functional components by preventing unnecessary re-renders.
+useMemo for memoizing expensive computations
+Explanation: Discuss how to use the useMemo hook to memoize expensive computations and avoid recomputing them on every render.
+Example Code:
+
+```js
+import React, { useMemo } from 'react';
+
+const ExpensiveComponent = ({ data }) => {
+  // Expensive computation based on data
+  const computedValue = useMemo(() => {
+    // Expensive computation logic
+    return compute(data);
+  }, [data]);
+
+  return <div>{computedValue}</div>;
+};
+
+const App = () => {
+  const data = fetchData(); // Fetch data from an API
+
+  return <ExpensiveComponent data={data} />;
+};
+```
+Description: In this example, the ExpensiveComponent receives data as a prop and performs an expensive computation based on that data. By using the useMemo hook, we memoize the computed value and only recompute it when the data prop changes. This helps optimize performance by avoiding unnecessary computations on every render.
+
+### Day 19: React and RESTful APIs
+
+Fetching data from a RESTful API
+Explanation: Discuss how to fetch data from a RESTful API using the fetch API or libraries like Axios in React.
+Managing API data with state
+Explanation: Explain how to manage API data using state in React components and handle loading, error, and success states.
+Example Code:
+```js
+import React, { useState, useEffect } from 'react';
+
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+  const [isLoading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    fetch('https://api.example.com/users')
+      .then((response) => response.json())
+      .then((data) => {
+        setUsers(data);
+        setLoading(false);
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error.message}</div>;
+  }
+
+  return (
+    <ul>
+      {users.map((user) => (
+        <li key={user.id}>{user.name}</li>
+      ))}
+    </ul>
+  );
+};
+
+const App = () => {
+  return <UserList />;
+};
+```
+Description: In this example, the UserList component fetches user data from a RESTful API using the fetch API. The component manages the loading, error, and success states using state variables. While the data is being fetched, a loading message is displayed. If an error occurs, an error message is displayed. Once the data is successfully fetched, it is rendered in an unordered list.
+
+### Day 20: React Router for Routing in React Applications
+
+Introduction to React Router
+Explanation: Provide an overview of React Router and its importance in building multi-page React applications.
+Setting up React Router
+Explanation: Guide the participants through the setup process for React Router in a React project.
+Basic routing and navigation
+Explanation: Explain how to define routes and navigate between them using React Router's Route and Link components.
+Example Code:
+```js
+import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
+
+const Home = () => <div>Home</div>;
+const About = () => <div>About</div>;
+const Contact = () => <div>Contact</div>;
+
+const App = () => {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Route path="/" exact component={Home} />
+      <Route path="/about" component={About} />
+      <Route path="/contact" component={Contact} />
+    </Router>
+  );
+};
+```
+Description: In this example, we use React Router to define routes and navigation. The Router component sets up the routing context, and the Link component is used to create navigation links. The Route component defines the association between a route path and the corresponding component to render. Clicking on the navigation links changes the URL and renders the corresponding component.
