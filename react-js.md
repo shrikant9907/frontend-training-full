@@ -758,3 +758,185 @@ const App = () => {
 };
 ```
 Description: In this example, we use React Router to define routes and navigation. The Router component sets up the routing context, and the Link component is used to create navigation links. The Route component defines the association between a route path and the corresponding component to render. Clicking on the navigation links changes the URL and renders the corresponding component.
+
+### Day 21: React Forms and Form Validation
+
+Controlled components and form handling
+Explanation: Discuss the concept of controlled components and how to handle form inputs using React's controlled component pattern.
+Form submission and handling
+Explanation: Explain how to handle form submission in React and perform actions such as sending data to a server or updating state.
+Form validation using built-in and custom validators
+Explanation: Introduce form validation techniques using built-in HTML5 validation attributes and custom validation functions.
+Example Code:
+
+```js
+  import React, { useState } from 'react';
+
+const LoginForm = () => {
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+  });
+  const [errors, setErrors] = useState({});
+
+  const handleInputChange = (event) => {
+    const { name, value } = event.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const validationErrors = validateForm(formData);
+    if (Object.keys(validationErrors).length === 0) {
+      // Submit form data or perform other actions
+    } else {
+      setErrors(validationErrors);
+    }
+  };
+
+  const validateForm = (data) => {
+    let errors = {};
+
+    if (data.username.trim() === '') {
+      errors.username = 'Username is required';
+    }
+
+    if (data.password.trim() === '') {
+      errors.password = 'Password is required';
+    }
+
+    return errors;
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="username">Username:</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          value={formData.username}
+          onChange={handleInputChange}
+        />
+        {errors.username && <div className="error">{errors.username}</div>}
+      </div>
+      <div>
+        <label htmlFor="password">Password:</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          value={formData.password}
+          onChange={handleInputChange}
+        />
+        {errors.password && <div className="error">{errors.password}</div>}
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  );
+};
+
+const App = () => {
+  return <LoginForm />;
+};
+```
+Description: In this example, we create a simple login form using React. The form data is managed using state and the controlled component pattern. The handleInputChange function updates the form data state whenever the input values change. The handleSubmit function is called when the form is submitted and performs form validation using the validateForm function. If there are validation errors, the errors are displayed. Otherwise, the form data can be submitted or further actions can be performed.
+
+### Day 22: React Hooks - useRef and useReducer
+
+useRef hook for accessing DOM elements
+Explanation: Introduce the useRef hook and its usage to access and interact with DOM elements in React.
+useReducer hook for managing complex state
+Explanation: Discuss the useReducer hook as an alternative to useState for managing complex state and actions in React.
+Example Code:
+```js
+import React, { useRef, useReducer } from 'react';
+
+const Counter = () => {
+  const countRef = useRef(0);
+  const [state, dispatch] = useReducer(counterReducer, 0);
+
+  const counterReducer = (state, action) => {
+    switch (action.type) {
+      case 'INCREMENT':
+        return state + 1;
+      case 'DECREMENT':
+        return state - 1;
+      default:
+        return state;
+    }
+  };
+
+  const increment = () => {
+    countRef.current += 1;
+    console.log('Count:', countRef.current);
+  };
+
+  const decrement = () => {
+    dispatch({ type: 'DECREMENT' });
+  };
+
+  return (
+    <div>
+      <button onClick={increment}>Increment (ref)</button>
+      <button onClick={decrement}>Decrement (reducer)</button>
+      <p>Count: {state}</p>
+    </div>
+  );
+};
+
+const App = () => {
+  return <Counter />;
+};
+```
+Description: In this example, we use the useRef hook to create a reference (countRef) and store the current count value. The increment function updates the count value by directly accessing and modifying the reference value. We also use the useReducer hook to manage the count state in a more complex scenario, where the count can be incremented or decremented using the dispatch function. The count value is displayed using the state variable.
+
+### Day 23: React Context API
+
+Introduction to React Context
+Explanation: Provide an overview of React Context and its purpose in sharing data between components without prop drilling.
+Creating a Context and Provider
+Explanation: Explain how to create a context and its provider component to share data throughout the component tree.
+Consuming Context with useContext
+Explanation: Discuss how to consume the context using the useContext hook and access the shared data in nested components.
+Example Code:
+
+```js
+import React, { useContext } from 'react';
+
+const ThemeContext = React.createContext();
+
+const App = () => {
+  return (
+    <ThemeContext.Provider value="dark">
+      <Header />
+      <Content />
+    </ThemeContext.Provider>
+  );
+};
+
+const Header = () => {
+  const theme = useContext(ThemeContext);
+
+  return (
+    <header className={theme}>
+      <h1>My App</h1>
+    </header>
+  );
+};
+
+const Content = () => {
+  const theme = useContext(ThemeContext);
+
+  return (
+    <div className={theme}>
+      <p>This is the content of the app.</p>
+    </div>
+  );
+};
+```
+Description: In this example, we create a ThemeContext using React's createContext function. The App component serves as the provider of the context, wrapping the Header and Content components. The Header and Content components consume the context using the useContext hook, accessing the shared theme value. The className of the header and content elements dynamically change based on the theme value.
