@@ -1262,3 +1262,58 @@ const Counter = () => {
 export default App;
 ```
 Description: In this example, we set up Redux in a React application. The counterReducer function handles the state updates based on the dispatched actions. The actions are defined using action types and action creators. The Redux store is created using createStore from Redux. The Counter component uses the useSelector hook to access the state and the useDispatch hook to dispatch actions. The count value is displayed, and the buttons dispatch the respective increment and decrement actions.
+
+### Day 30: Axios in React js
+
+Axios is a popular JavaScript library used for making HTTP requests from the browser. It provides a simple and intuitive API for performing various types of HTTP requests, such as GET, POST, PUT, DELETE, etc. Axios is often used in React.js applications to fetch data from APIs or interact with backend services.
+
+To use Axios in a React.js application, you need to install the Axios library first. You can install Axios using npm or yarn by running the following command:
+
+```
+npm install axios
+```
+Once Axios is installed, you can import it into your React component and use it to make HTTP requests. Here's an example of how to use Axios in a React component:
+
+```js
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+
+const MyComponent = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    // Make a GET request using Axios
+    axios.get('https://api.example.com/data')
+      .then(response => {
+        // Handle the successful response
+        setData(response.data);
+      })
+      .catch(error => {
+        // Handle the error
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      {data.map(item => (
+        <p key={item.id}>{item.name}</p>
+      ))}
+    </div>
+  );
+};
+
+export default MyComponent;
+
+```
+In this example, the useEffect hook is used to fetch data from the specified URL when the component mounts. The Axios get method is used to make a GET request to the API endpoint. The response data is then stored in the component's state using the setData function.
+
+When the data is received successfully, it is mapped over to render individual <p> elements, displaying the name property of each item. The key prop is used for efficient rendering of the list.
+
+If there is an error during the API request, the catch block will handle the error and log it to the console.
+
+Axios provides many other features, such as request cancellation, interceptors, and setting request headers. You can refer to the Axios documentation for more advanced usage and customization options.
+
+Note: In a real application, it's recommended to separate the API requests into separate service files or use a state management library like Redux for better organization and separation of concerns.
+
+
