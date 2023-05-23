@@ -139,3 +139,223 @@ class Counter extends Component {
   }
 }
 ```
+
+### Day 5: Conditional Rendering
+
+Conditional rendering in React
+Explanation: Introduce conditional rendering techniques in React to conditionally display components or elements based on certain conditions.
+The ternary operator and logical && operator for conditional rendering
+Explanation: Discuss how to use the ternary operator (? :) and logical && operator to conditionally render elements or components.
+Example Code:
+```js
+import React from 'react';
+
+const Greeting = (props) => {
+  return (
+    <div>
+      {props.isLoggedIn ? (
+        <h1>Welcome back, {props.name}!</h1>
+      ) : (
+        <h1>Please log in.</h1>
+      )}
+    </div>
+  );
+};
+
+const App = () => {
+  const user = {
+    name: 'John',
+    isLoggedIn: true,
+  };
+
+  return <Greeting name={user.name} isLoggedIn={user.isLoggedIn} />;
+};
+```
+Description: In this example, the Greeting component conditionally renders different greetings based on the isLoggedIn prop value. If isLoggedIn is true, it displays a welcome message with the user's name. Otherwise, it displays a message prompting the user to log in.
+
+### Day 6: Lists and Keys
+Rendering lists in React
+Explanation: Discuss how to render dynamic lists of items in React using arrays and the map method.
+
+The concept of keys in React and their importance
+Explanation: Explain the importance of using unique keys when rendering lists in React to help React identify and efficiently update list items.
+
+Example Code:
+```js
+import React from 'react';
+
+const TodoList = (props) => {
+  const todos = props.todos.map((todo) => <li key={todo.id}>{todo.text}</li>);
+
+  return <ul>{todos}</ul>;
+};
+
+const App = () => {
+  const todos = [
+    { id: 1, text: 'Buy groceries' },
+    { id: 2, text: 'Clean the house' },
+    { id: 3, text: 'Walk the dog' },
+  ];
+
+  return <TodoList todos={todos} />;
+};
+```
+Description: In this example, we have an array of todos containing objects with an id and text property. The TodoList component uses the map method to iterate over the todos array and render a list of <li> elements with the corresponding text. Each list item has a unique key assigned to it, which helps React efficiently update the list when changes occur.
+
+### Day 7: Forms in React
+
+Handling forms in React
+Explanation: Discuss how to handle form inputs and manage their state in React, including capturing user input and updating component state accordingly.
+Controlled components and uncontrolled components
+Explanation: Explain the concepts of controlled components (where form inputs are controlled by React state) and uncontrolled components (where form inputs are handled by the DOM).
+Example Code:
+```js
+import React, { useState } from 'react';
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Submitted:', username, password);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        placeholder="Password"
+      />
+      <button type="submit">Login</button>
+    </form>
+  );
+};
+
+const App = () => {
+  return <LoginForm />;
+};
+```
+Description: In this example, the LoginForm component manages the state of username and password using the useState hook. The form inputs are controlled components, where their values are tied to the component state. The handleSubmit function is called when the form is submitted, preventing the default form submission behavior and logging the entered username and password to the console.
+
+### Day 8: Styling in React
+
+Styling options in React (inline styles, CSS classes, CSS-in-JS libraries)
+Explanation: Discuss various approaches for styling React components, including inline styles, applying CSS classes, and using CSS-in-JS libraries like styled-components or emotion.
+Conditional styling based on state or props
+Explanation: Explain how to conditionally apply styles to components based on their state or props, allowing dynamic styling in React.
+Example Code:
+```js
+import React from 'react';
+
+const Button = (props) => {
+  const buttonStyles = {
+    backgroundColor: props.primary ? 'blue' : 'gray',
+    color: 'white',
+    padding: '10px 20px',
+    borderRadius: '5px',
+  };
+
+  return (
+    <button style={buttonStyles}>
+      {props.primary ? 'Primary Button' : 'Secondary Button'}
+    </button>
+  );
+};
+
+const App = () => {
+  return (
+    <div>
+      <Button primary />
+      <Button />
+    </div>
+  );
+};
+```
+Description: In this example, the Button component uses inline styles to conditionally apply different styles based on the primary prop. If primary is true, the button will have a blue background and display "Primary Button". Otherwise, it will have a gray background and display "Secondary Button".
+
+### Day 9: React Router
+
+Introduction to React Router
+Explanation: Introduce React Router as a popular library for handling routing and navigation in React applications.
+Setting up routes and rendering components
+Explanation: Discuss how to set up routes in React Router and render the appropriate components based on the URL.
+Navigation between routes using links and programmatic navigation
+Explanation: Explain how to create links using the <Link> component and perform programmatic navigation using the history object or hooks like useHistory.
+Example Code:
+```js
+import React from 'react';
+import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
+
+const Home = () => {
+  return <h1>Home Page</h1>;
+};
+
+const About = () => {
+  return <h1>About Page</h1>;
+};
+
+const App = () => {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+        </ul>
+      </nav>
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+      </Switch>
+    </Router>
+  );
+};
+```
+Description: In this example, we set up routes using Router, Switch, and Route components from React Router. The <Link> components create navigation links, and based on the URL, the corresponding component (Home or About) will be rendered.
+
+### Day 10: State Management with React Context
+
+Introduction to React Context
+Explanation: Introduce React Context as a mechanism for managing state across components without prop drilling.
+Creating a context and providing values
+Explanation: Discuss how to create a context and provide values to it, making the values accessible to components that consume the context.
+Consuming context values using context API or useContext hook
+Explanation: Explain how to consume context values in components using the context API (Consumer component) or the useContext hook.
+Example Code:
+```js
+import React, { createContext, useContext } from 'react';
+
+const UserContext = createContext();
+
+const DisplayUsername = () => {
+  const user = useContext(UserContext);
+
+  return <h1>Welcome, {user.username}!</h1>;
+};
+
+const App = () => {
+  const user = {
+    username: 'JohnDoe',
+  };
+
+  return (
+    <UserContext.Provider value={user}>
+      <DisplayUsername />
+    </UserContext.Provider>
+  );
+};
+```
+Description: In this example, we create a context called UserContext using createContext. The DisplayUsername component consumes the user context using the useContext hook and displays the username. The user object is provided as the value to the UserContext.Provider, making it accessible to the consuming components.
