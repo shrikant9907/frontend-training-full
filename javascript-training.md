@@ -24,3 +24,66 @@ if (num > 0) {
 }
 
 ```
+
+### Day 3: Functions and Scope
+
+Understand the concept of functions in JavaScript and how to define and call them.
+Learn about function parameters, return values, and scope.
+Example:
+```js
+// Define and call a function
+function greet(name) {
+  console.log("Hello, " + name + "!");
+}
+
+greet("John");
+```
+
+### Day 4: Arrays and Objects
+
+Explore JavaScript arrays for storing and manipulating collections of data.
+Learn about objects and how to create and access their properties.
+Example:
+```js
+// Working with arrays
+var numbers = [1, 2, 3, 4, 5];
+console.log(numbers[0]); // Output: 1
+
+// Working with objects
+var person = {
+  name: "John",
+  age: 30,
+  city: "New York"
+};
+
+console.log(person.name); // Output: John
+```
+
+### Day 5: Working with Strings
+
+Learn about string manipulation methods and properties in JavaScript.
+Explore common string operations like concatenation and substring.
+Example: 
+```js
+// Manipulating strings
+var greeting = "Hello";
+var name = "John";
+var message = greeting + ", " + name + "!";
+console.log(message); // Output: Hello, John!
+```
+
+### Day 6: DOM Manipulation and Events
+Understand how to interact with the Document Object Model (DOM) using JavaScript.
+Learn how to select and modify HTML elements dynamically.
+Example:
+```js
+// Changing element content
+var heading = document.getElementById("myHeading");
+heading.innerHTML = "New Heading";
+
+// Adding event listeners
+var button = document.getElementById("myButton");
+button.addEventListener("click", function() {
+  console.log("Button clicked!");
+});
+```
