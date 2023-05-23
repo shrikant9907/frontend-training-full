@@ -87,3 +87,36 @@ button.addEventListener("click", function() {
   console.log("Button clicked!");
 });
 ```
+
+### Day 7: Error Handling and Debugging
+
+Explore error handling techniques in JavaScript, including try-catch blocks.
+Learn how to use browser developer tools for debugging.
+Example:
+```js
+// Error handling with try-catch
+try {
+  // Code that might throw an error
+  var result = 10 / 0;
+} catch (error) {
+  console.log("An error occurred: " + error);
+}
+```
+
+### Day 8: Asynchronous JavaScript and AJAX
+
+Understand asynchronous programming in JavaScript and how to handle asynchronous operations.
+Learn about AJAX (Asynchronous JavaScript and XML) for making HTTP requests.
+Example:
+```js
+// Making an AJAX request
+var xhr = new XMLHttpRequest();
+xhr.open("GET", "https://api.example.com/data", true);
+xhr.onreadystatechange = function() {
+  if (xhr.readyState === 4 && xhr.status === 200) {
+    var response = JSON.parse(xhr.responseText);
+    console.log(response);
+  }
+};
+xhr.send
+```
