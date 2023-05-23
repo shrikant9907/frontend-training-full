@@ -759,7 +759,7 @@ const App = () => {
 ```
 Description: In this example, we use React Router to define routes and navigation. The Router component sets up the routing context, and the Link component is used to create navigation links. The Route component defines the association between a route path and the corresponding component to render. Clicking on the navigation links changes the URL and renders the corresponding component.
 
-### Day 21: React Forms and Form Validation
+### Day 21: React Forms and Form Validation (2)
 
 Controlled components and form handling
 Explanation: Discuss the concept of controlled components and how to handle form inputs using React's controlled component pattern.
