@@ -1,1 +1,1 @@
-# frontend-training-full
+# Frontend Training Material (React)
