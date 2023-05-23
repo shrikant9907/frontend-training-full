@@ -359,3 +359,135 @@ const App = () => {
 };
 ```
 Description: In this example, we create a context called UserContext using createContext. The DisplayUsername component consumes the user context using the useContext hook and displays the username. The user object is provided as the value to the UserContext.Provider, making it accessible to the consuming components.
+  
+### Day 11: React Hooks
+
+Introduction to React Hooks
+Explanation: Introduce React Hooks as a way to add state and other React features to functional components without using class components.
+useState: Managing state in functional components
+Explanation: Discuss how to use the useState hook to add and manage state in functional components.
+useEffect: Performing side effects in functional components
+Explanation: Explain how to use the useEffect hook to perform side effects, such as data fetching, subscribing to events, or updating the DOM, in functional components.
+Example Code:
+```js
+import React, { useState, useEffect } from 'react';
+
+const Counter = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    document.title = `Count: ${count}`;
+  }, [count]);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+};
+
+const App = () => {
+  return <Counter />;
+};
+```
+Description: In this example, the Counter component uses the useState hook to add state to track the count value. The useEffect hook is used to update the document title whenever the count value changes. Clicking the "Increment" button updates the count state and triggers the effect.
+
+### Day 12: React Forms and Validation
+
+Controlled components and form handling
+Explanation: Review controlled components and how to handle form inputs and their state in React.
+Form validation with state and conditional rendering
+Explanation: Discuss form validation techniques using state and conditional rendering to display error messages or disable the submit button.
+Example Code:
+```js
+import React, { useState } from 'react';
+
+const LoginForm = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [isFormValid, setFormValid] = useState(false);
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Perform form submission logic
+  };
+
+  useEffect(() => {
+    setFormValid(username !== '' && password !== '');
+  }, [username, password]);
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        value={username}
+        onChange={handleUsernameChange}
+        placeholder="Username"
+      />
+      <input
+        type="password"
+        value={password}
+        onChange={handlePasswordChange}
+        placeholder="Password"
+      />
+      <button type="submit" disabled={!isFormValid}>
+        Submit
+      </button>
+    </form>
+  );
+};
+
+const App = () => {
+  return <LoginForm />;
+};
+```
+Description: In this example, the LoginForm component manages the state of username, password, and isFormValid using the useState hook. The form inputs are controlled components, and their values are updated via the handleUsernameChange and handlePasswordChange functions. The form submission is handled by the handleSubmit function, which is triggered when the submit button is clicked. The isFormValid state determines whether the submit button is enabled or disabled based on the input values.
+
+### Day 13: React Component Lifecycle
+
+Understanding the React component lifecycle
+Explanation: Provide an overview of the different phases in the React component lifecycle, including mounting, updating, and unmounting.
+Class component lifecycle methods
+Explanation: Explore the class component lifecycle methods, such as componentDidMount, componentDidUpdate, and componentWillUnmount, and their purposes.
+Example Code:
+``` 
+import React, { Component } from 'react';
+
+class Timer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { seconds: 0 };
+  }
+
+  componentDidMount() {
+    this.timerId = setInterval(() => {
+      this.setState((prevState) => ({ seconds: prevState.seconds + 1 }));
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.timerId);
+  }
+
+  render() {
+    return <div>Seconds: {this.state.seconds}</div>;
+  }
+}
+
+const App = () => {
+  return <Timer />;
+};
+```
+
+Description: In this example, the Timer class component uses the componentDidMount method to start a timer that increments the seconds state every second using setInterval. The componentWillUnmount method is used to clear the timer when the component is about to be unmounted. The current value of seconds is displayed in the render method.
+
+###
