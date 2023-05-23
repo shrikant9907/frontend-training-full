@@ -138,3 +138,26 @@ git submodule update --init --recursive
 # Commenting on and closing issues
 # Comment on issues and close them using keywords (e.g., "Fixes #1") on GitHub
 ```
+
+### Day 7: Git Best Practices
+- Writing clear and concise commit messages
+- Using meaningful branch and tag names
+- Avoiding committing sensitive information
+- Properly managing large binary files with Git LFS
+- Using Git hooks for automation
+```bash
+# Writing clear and concise commit messages
+# Use descriptive commit messages that explain the changes made
+
+# Using meaningful branch and tag names
+# Choose meaningful names for branches and tags that reflect their purpose
+
+# Avoiding committing sensitive information
+# Avoid committing files or information that should not be public
+
+# Properly managing large binary files with Git LFS
+# Install Git LFS and track large files using Git LFS commands
+
+# Using Git hooks for automation
+# Add scripts to the .git/hooks directory to automate tasks (pre-commit, post-commit, etc.)
+```
