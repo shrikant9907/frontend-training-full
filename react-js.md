@@ -940,3 +940,325 @@ const Content = () => {
 };
 ```
 Description: In this example, we create a ThemeContext using React's createContext function. The App component serves as the provider of the context, wrapping the Header and Content components. The Header and Content components consume the context using the useContext hook, accessing the shared theme value. The className of the header and content elements dynamically change based on the theme value.
+
+### Day 24: React Context API (continued)
+
+Context with Multiple Values
+Explanation: Discuss how to create and use multiple contexts in a React application to share different types of data.
+Consuming Context with Class Components
+Explanation: Explain how to consume context in class components using the static contextType property or the Consumer component.
+Updating Context Data
+Explanation: Discuss different approaches to update context data, including using state in the provider component or using a separate reducer function.
+Example Code:
+```js
+import React, { useContext, useState } from 'react';
+
+// Theme Context
+const ThemeContext = React.createContext();
+const ThemeProvider = ThemeContext.Provider;
+
+// User Context
+const UserContext = React.createContext();
+const UserProvider = UserContext.Provider;
+
+const App = () => {
+  const [theme, setTheme] = useState('light');
+  const [user, setUser] = useState(null);
+
+  const toggleTheme = () => {
+    setTheme((prevTheme) => (prevTheme === 'light' ? 'dark' : 'light'));
+  };
+
+  const login = (username) => {
+    setUser(username);
+  };
+
+  return (
+    <ThemeProvider value={{ theme, toggleTheme }}>
+      <UserProvider value={{ user, login }}>
+        <Header />
+        <Content />
+      </UserProvider>
+    </ThemeProvider>
+  );
+};
+
+const Header = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
+  const { user } = useContext(UserContext);
+
+  return (
+    <header className={theme}>
+      <h1>My App</h1>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+      {user && <p>Welcome, {user}!</p>}
+    </header>
+  );
+};
+
+class Content extends React.Component {
+  static contextType = UserContext;
+
+  render() {
+    const { user, login } = this.context;
+
+    return (
+      <div>
+        {!user && <button onClick={() => login('John')}>Login</button>}
+        {user && <p>Content for logged-in users.</p>}
+      </div>
+    );
+  }
+}
+```
+Description: In this example, we extend the previous React Context example to include multiple contexts: ThemeContext and UserContext. The App component manages the theme state and user data using the useState hook. The toggleTheme function updates the theme state, and the login function updates the user state. Both contexts are provided by their respective provider components in the component tree. The Header and Content components consume the contexts using useContext or the static contextType property in class components.
+
+### Day 25: React Hooks - useEffect
+
+Introduction to the useEffect hook
+Explanation: Provide an overview of the useEffect hook and its purpose in handling side effects in React components.
+Handling component lifecycle with useEffect
+Explanation: Explain how to use useEffect to replicate the behavior of componentDidMount, componentDidUpdate, and componentWillUnmount lifecycle methods.
+Managing dependencies and optimization
+Explanation: Discuss how to handle dependencies in useEffect and optimize its performance by using dependencies and cleanup functions.
+Example Code:
+```js
+import React, { useState, useEffect } from 'react';
+
+const Timer = () => {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((prevCount) => prevCount + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, []);
+
+  return <div>{count} seconds</div>;
+};
+
+const App = () => {
+  const [showTimer, setShowTimer] = useState(true);
+
+  return (
+    <div>
+      {showTimer && <Timer />}
+      <button onClick={() => setShowTimer((prevShowTimer) => !prevShowTimer)}>
+        Toggle Timer
+      </button>
+    </div>
+  );
+};
+```
+Description: In this example, we create a Timer component that displays the number of seconds since its initial rendering. The useEffect hook is used to start a timer interval when the component mounts and clears the interval when the component unmounts. The empty dependency array [] ensures that the effect is only executed once. The App component has a button to toggle the visibility of the Timer component, demonstrating the usage of useEffect in managing component lifecycle and side effects.
+
+### Day 26: React Performance Optimization
+
+React.memo for component memoization
+Explanation: Introduce the React.memo higher-order component and its usage to memoize functional components and optimize re-rendering.
+useMemo for expensive computations
+Explanation: Discuss how to use the useMemo hook to memoize expensive computations and avoid unnecessary re-calculations.
+useCallback for memoizing event handlers
+Explanation: Explain how to use the useCallback hook to memoize event handlers and prevent unnecessary re-creations of handler functions.
+Example Code:
+
+```js
+  import React, { useState, useMemo, useCallback } from 'react';
+
+const ExpensiveComponent = ({ data }) => {
+  // Expensive computation
+  const computeExpensiveValue = () => {
+    // ... some complex calculations using data
+    return /* result */;
+  };
+
+  const memoizedValue = useMemo(() => computeExpensiveValue(data), [data]);
+
+  return <div>{memoizedValue}</div>;
+};
+
+const ParentComponent = () => {
+  const [count, setCount] = useState(0);
+
+  const handleClick = useCallback(() => {
+    setCount((prevCount) => prevCount + 1);
+  }, []);
+
+  return (
+    <div>
+      <button onClick={handleClick}>Increment</button>
+      <ExpensiveComponent data={count} />
+    </div>
+  );
+};
+
+const App = () => {
+  return <ParentComponent />;
+};
+
+```
+Description: In this example, we have an ExpensiveComponent that performs some computationally expensive calculations based on the provided data prop. By using the useMemo hook, we can memoize the result of the computation and avoid re-calculating it unnecessarily. The ParentComponent increments the count state when the button is clicked. The handleClick function is memoized using useCallback to prevent unnecessary re-creations of the function instance.
+
+### Day 27: React Router
+
+Introduction to React Router
+Explanation: Provide an overview of React Router and its purpose in managing routing in React applications.
+Setting up React Router
+Explanation: Explain how to install and configure React Router in a React application.
+Creating Routes and Route Parameters
+Explanation: Discuss how to create routes using the <Route> component and handle dynamic route parameters.
+Example Code:
+```js
+import React from 'react';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+
+const Home = () => <h1>Home</h1>;
+const About = () => <h1>About</h1>;
+const Contact = () => <h1>Contact</h1>;
+const NotFound = () => <h1>404 Not Found</h1>;
+
+const App = () => {
+  return (
+    <Router>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+          <li>
+            <Link to="/about">About</Link>
+          </li>
+          <li>
+            <Link to="/contact">Contact</Link>
+          </li>
+        </ul>
+      </nav>
+
+      <Switch>
+        <Route exact path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
+
+```
+Description: In this example, we use React Router to set up basic routing in a React application. The <Router> component wraps the entire application. The navigation menu is created using <Link> components. The <Switch> component ensures that only one route is rendered at a time. Each route is defined using the <Route> component, specifying the path and the component to render. If none of the routes match, the NotFound component is rendered.
+
+### Day 28: React Hooks - useContext
+
+Introduction to the useContext hook
+Explanation: Provide an overview of the useContext hook and its purpose in consuming context in functional components.
+Consuming Context in Functional Components
+Explanation: Explain how to use the useContext hook to access and consume data from a React context in functional components.
+Example Code:
+```js
+import React, { useContext } from 'react';
+
+const UserContext = React.createContext();
+
+const App = () => {
+  const user = {
+    name: 'John',
+    age: 30,
+  };
+
+  return (
+    <UserContext.Provider value={user}>
+      <Profile />
+    </UserContext.Provider>
+  );
+};
+
+const Profile = () => {
+  const user = useContext(UserContext);
+
+  return (
+    <div>
+      <h1>{user.name}</h1>
+      <p>Age: {user.age}</p>
+    </div>
+  );
+};
+
+export default App;
+
+```
+
+Description: In this example, we create a UserContext using React's createContext function. The user data is provided by the <UserContext.Provider> component, wrapping the Profile component. The Profile component consumes the context using the useContext hook, accessing the user data. The name and age properties of the user object are displayed in the component.
+
+### Day 29: State Management with Redux
+
+Introduction to Redux
+Explanation: Provide an overview of Redux and its purpose in managing application state in React.
+Setting up Redux in a React application
+Explanation: Explain how to install and configure Redux and its related libraries in a React application.
+Creating Actions, Reducers, and Store
+Explanation: Discuss the concepts of actions, reducers, and the store in Redux and how they work together to manage state.
+Example Code:
+
+```js
+import React from 'react';
+import { createStore } from 'redux';
+import { Provider, useDispatch, useSelector } from 'react-redux';
+
+// Action Types
+const INCREMENT = 'INCREMENT';
+const DECREMENT = 'DECREMENT';
+
+// Action Creators
+const increment = () => ({
+  type: INCREMENT,
+});
+
+const decrement = () => ({
+  type: DECREMENT,
+});
+
+// Reducer
+const counterReducer = (state = 0, action) => {
+  switch (action.type) {
+    case INCREMENT:
+      return state + 1;
+    case DECREMENT:
+      return state - 1;
+    default:
+      return state;
+  }
+};
+
+// Store
+const store = createStore(counterReducer);
+
+const App = () => {
+  return (
+    <Provider store={store}>
+      <Counter />
+    </Provider>
+  );
+};
+
+const Counter = () => {
+  const count = useSelector((state) => state);
+  const dispatch = useDispatch();
+
+  return (
+    <div>
+      <button onClick={() => dispatch(increment())}>Increment</button>
+      <button onClick={() => dispatch(decrement())}>Decrement</button>
+      <p>Count: {count}</p>
+    </div>
+  );
+};
+
+export default App;
+```
+Description: In this example, we set up Redux in a React application. The counterReducer function handles the state updates based on the dispatched actions. The actions are defined using action types and action creators. The Redux store is created using createStore from Redux. The Counter component uses the useSelector hook to access the state and the useDispatch hook to dispatch actions. The count value is displayed, and the buttons dispatch the respective increment and decrement actions.
