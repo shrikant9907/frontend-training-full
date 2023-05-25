@@ -1,6 +1,26 @@
 # JavaScript Exercises List
 
 - Write a function that takes two numbers as parameters and returns their sum.
+
+## Example 1
+```js
+function getSum(n1, n2) {
+  return n1 + n2;
+}
+const sum = getSum(5, 2);
+console.log(sum);  
+// Output: 7
+```
+## Example 2: Using arrow function
+```js
+const getSum = (n1, n2) => {
+  return n1 + n2;
+}
+const sum = getSum(5, 2);
+console.log(sum);  
+// Output: 7
+```
+
 - Write a function that takes an array as a parameter and returns the length of the array.
 - Write a function that takes a string as a parameter and returns the reversed string.
 - Write a function that takes an array of numbers as a parameter and returns the largest number in the array.
