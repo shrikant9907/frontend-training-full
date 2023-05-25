@@ -1,0 +1,103 @@
+# Javascript Excercise List 
+
+
+Write a function to check if a given number is even or odd.
+Write a function to calculate the factorial of a number.
+Write a function to find the maximum number in an array.
+Write a function to reverse a string.
+Write a function to check if a given string is a palindrome.
+Write a function to calculate the sum of all numbers in an array.
+Write a function to check if a given year is a leap year.
+Write a function to find the second largest number in an array.
+Write a function to convert a temperature from Celsius to Fahrenheit.
+Write a function to remove all duplicates from an array.
+Write a function to check if a given string contains only digits.
+Write a function to sort an array of numbers in ascending order.
+Write a function to count the number of vowels in a string.
+Write a function to find the index of the first occurrence of a given element in an array.
+Write a function to generate a random number between two given numbers.
+Write a function to calculate the average of an array of numbers.
+Write a function to capitalize the first letter of each word in a sentence.
+Write a function to check if two arrays are equal.
+Write a function to remove all whitespace characters from a string.
+Write a function to find the longest word in a sentence.
+Write a function to check if a given number is prime.
+Write a function to calculate the power of a number.
+Write a function to find the sum of squares of numbers in an array.
+Write a function to convert a string to title case.
+Write a function to remove the last element from an array.
+Write a function to generate a random password of a given length.
+Write a function to find the difference between two arrays.
+Write a function to reverse the order of words in a sentence.
+Write a function to find the median of an array of numbers.
+Write a function to convert a number to Roman numerals.
+Write a function to remove a specific element from an array.
+Write a function to check if a given string ends with a specific substring.
+Write a function to calculate the sum of digits in a number.
+Write a function to find the intersection of two arrays.
+Write a function to remove all vowels from a string.
+Write a function to find the smallest number in an array.
+Write a function to check if a given string is a valid email address.
+Write a function to check if a given number is a perfect square.
+Write a function to generate a random color in RGB format.
+Write a function to calculate the area of a circle.
+Write a function to find the factorial of a number using recursion.
+Write a function to remove the first occurrence of a specific element from an array.
+Write a function to reverse the order of words in a sentence without using the built-in reverse() function.
+Write a function to check if a given string is a valid URL.
+Write a function to generate a random alphanumeric string of a given length.
+Write a function to find the difference between two dates in days.
+Write a function to convert an array of strings to a single string with comma-separated values.
+Write a function to check if a given string is a pangram (contains all the letters of the alphabet).
+Write a function to find the GCD (Greatest Common Divisor) of two numbers.
+Write a function to remove all special characters from a string.
+Write a function to check if a given string is a valid palindrome ignoring spaces and punctuation.
+Write a function to generate a random number between a given range, excluding specific numbers.
+Write a function to count the number of occurrences of a specific element in an array.
+Write a function to check if a given string is an anagram of another string.
+Write a function to generate a random password containing both letters and numbers.
+Write a function to find the number of days in a specific month of a given year.
+Write a function to check if a given number is a Fibonacci number.
+Write a function to remove all elements from an array except for those that satisfy a specific condition.
+Write a function to convert a binary number to decimal.
+Write a function to check if a given string is a valid IPv4 address.
+Write a function to find the first non-repeating character in a string.
+Write a function to calculate the square root of a number using the Babylonian method.
+Write a function to check if a given string contains only unique characters.
+Write a function to remove all elements from an array that are greater than a specific value.
+Write a function to generate a random password containing letters, numbers, and special characters.
+Write a function to find the union of two arrays.
+Write a function to check if a given number is a perfect number.
+Write a function to reverse the order of words in a sentence while preserving the position of punctuation marks.
+Write a function to find the difference between two dates in hours.
+Write a function to remove duplicate characters from a string.
+Write a function to calculate the area of a triangle given its base and height.
+Write a function to find the number of trailing zeros in the factorial of a number.
+Write a function to check if a given string is a valid credit card number.
+Write a function to generate a random UUID (Universally Unique Identifier).
+Write a function to convert a decimal number to binary.
+Write a function to find the mode (most frequently occurring element) in an array.
+Write a function to remove all elements from an array that are less than a specific value.
+Write a function to check if a given string is a valid palindrome considering alphanumeric characters only.
+Write a function to calculate the area of a rectangle given its length and width.
+Write a function to find the number of days between two dates.
+Write a function to check if a given number is a strong number.
+Write a function to remove all whitespace characters from a string using regular expressions.
+Write a function to generate a random password containing uppercase letters, lowercase letters, numbers, and special characters.
+Write a function to find the average of the middle three numbers in an array.
+Write a function to check if a given string is a valid JSON.
+Write a function to convert a decimal number to hexadecimal.
+Write a function to check if a given number is a palindrome in binary representation.
+Write a function to find the number of occurrences of each element in an array and return the result as an object.
+Write a function to calculate the perimeter of a rectangle given its length and width.
+Write a function to sort an array of objects based on a specific property.
+Write a function to check if a given number is a narcissistic number.
+Write a function to find the difference between two dates in minutes.
+Write a function to check if a given string is a valid IPv6 address.
+Write a function to find the intersection of multiple arrays.
+Write a function to convert a Roman numeral to decimal.
+Write a function to check if a given string is a valid palindrome considering case sensitivity.
+Write a function to calculate the area of a trapezoid given its two bases and height.
+Write a function to find the number of divisors of a given number.
+Write a function to remove duplicate objects from an array based on a specific property.
+Write a function to generate a random password with customizable criteria (length, character types, etc.).
