@@ -127,4 +127,10 @@ function getCommonElements(arr1, arr2) {
   return arr1.filter(element => arr2.includes(element));
 }
 ```
-Function to reverse the order of words in a sentence:
+
+### Function to reverse the order of words in a sentence:
+```js
+function reverseWordsOrder(sentence) {
+  return sentence.split(' ').reverse().join(' ');
+}
+```
