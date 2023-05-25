@@ -1,6 +1,6 @@
 # JavaScript Exercises List
 
-### Function that takes two numbers as parameters and returns their sum.
+### Function to get sum of two number
 
 #### Example 1
 ```js
